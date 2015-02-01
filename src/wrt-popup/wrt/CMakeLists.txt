@@ -1,0 +1,9 @@
+
+set(WRT_POPUP_COMMON_DIR ${PROJECT_SOURCE_DIR}/src/wrt-popup/wrt)
+
+SET(WRT_POPUP_COMMON_SRCS
+    ${WRT_POPUP_COMMON_DIR}/PopupSerializer.cpp
+)
+
+ADD_SUBDIRECTORY(popup-bin)
+ADD_SUBDIRECTORY(popup-runner)

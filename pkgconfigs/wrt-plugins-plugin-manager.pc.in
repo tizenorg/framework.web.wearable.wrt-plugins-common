@@ -1,0 +1,12 @@
+prefix=/usr
+project_name=@CMAKE_PROJECT_NAME@
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/${project_name}
+
+Name: WebRuntime DeviceApis Plugin Manager module
+Description: WebRuntime Plugin Manager module
+Version: @CMAKE_PROJECT_VERSION@
+Requires: dpl-efl wrt-plugins-commons wrt-plugins-commons-javascript dpl-wrt-dao-ro ewebkit2
+Libs: -L${libdir} -lwrt-plugins-plugin-manager
+Cflags: -I${includedir}/PluginManager

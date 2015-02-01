@@ -1,0 +1,12 @@
+<manifest>
+  <define>
+    <domain name="wrt-plugins-common"/>
+  </define>
+  <assign>
+    <filesystem path="/usr/bin/wrt-popup-ace-runtime" label="wrt-popup-ace-runtime" exec_label="wrt-popup-ace-runtime"/>
+    <filesystem path="/usr/bin/wrt-popup-wrt-runtime" label="wrt-popup-wrt-runtime" exec_label="wrt-popup-wrt-runtime"/>
+  </assign>
+  <request>
+    <domain name="_"/>
+  </request>
+</manifest>

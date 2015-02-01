@@ -1,0 +1,11 @@
+get_current_path()
+
+set(API_SOFTKEYBOARD_CHANGE_EVENT_PATH
+    ${CURRENT_PATH}
+    PARENT_SCOPE
+    )
+
+set(SRCS_API_SOFTKEYBOARD_CHANGE_EVENT
+    ${CURRENT_PATH}/SoftKeyboardChangeEvent.cpp
+  PARENT_SCOPE
+)

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: wrt-plugin-loading
+Description: wrt-plugin-loading
+Version: @PROJECT_VERSION@
+Requires: dpl-efl dpl-wrt-dao-ro ewebkit2
+Libs: -lwrt-plugin-loading -L${libdir}
+Cflags: -I${includedir}/wrt-plugin-loading -I${includedir}/wrt-plugins-common

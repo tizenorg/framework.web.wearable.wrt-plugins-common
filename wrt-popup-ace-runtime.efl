@@ -1,0 +1,13 @@
+wrt-popup-ace-runtime system::homedir rwx--- ------
+wrt-popup-ace-runtime device::app_logging -w---- ------
+wrt-popup-ace-runtime ail::db rw---- ------
+wrt-popup-ace-runtime xorg rwx--- ------
+wrt-popup-ace-runtime isf r-x--- ------
+wrt-popup-ace-runtime system::vconf rwx--- ------
+wrt-popup-ace-runtime sound_server rw---- ------
+wrt-popup-ace-runtime e17 rw---- ------
+e17 wrt-popup-ace-runtime rw---- ------
+wrt-popup-ace-runtime system::share rwx--- ------
+wrt-popup-ace-runtime pulseaudio rwx--- ------
+wrt-popup-ace-runtime dbus r----- ------
+

@@ -1,0 +1,11 @@
+get_current_path()
+
+set(API_TIZEN_SERVICE_EVENT_PATH
+    ${CURRENT_PATH}
+    PARENT_SCOPE
+    )
+
+set(SRCS_API_TIZEN_SERVICE_EVENT
+  ${CURRENT_PATH}/TizenServiceEvent.cpp
+  PARENT_SCOPE
+)

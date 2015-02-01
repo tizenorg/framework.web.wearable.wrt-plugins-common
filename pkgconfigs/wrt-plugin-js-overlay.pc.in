@@ -1,0 +1,11 @@
+prefix=/usr
+project_name=@CMAKE_PROJECT_NAME@
+exec_prefix=${prefix}
+includedir=${prefix}/include/${project_name}
+
+Name: wrt-plugin-js-overlay
+Description: header for enum value of supported custom js event types
+Version: @CMAKE_PROJECT_VERSION@
+Requires: 
+Libs:
+Cflags: -I${includedir}/js-overlay
