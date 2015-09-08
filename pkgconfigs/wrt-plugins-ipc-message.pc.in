@@ -1,0 +1,12 @@
+prefix=/usr
+project_name=@CMAKE_PROJECT_NAME@
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/${project_name}
+
+Name: wrt ipc message support
+Description: Support IPC between plugins and UI Process
+Version: @CMAKE_PROJECT_VERSION@
+Requires: dpl-efl ewebkit2
+Libs: -L${libdir} -lwrt-plugins-ipc-message
+Cflags: -I${includedir}

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: wrt-plugins-api-support
+Description: wrt-plugins-api-support
+Version: @PROJECT_VERSION@
+Requires:
+Libs: -lwrt-plugins-api-support -L${libdir}
+Cflags: -I${includedir}/wrt-plugins-api-support

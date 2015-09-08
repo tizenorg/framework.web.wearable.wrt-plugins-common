@@ -1,0 +1,13 @@
+wrt-popup-wrt-runtime system::homedir rwx--- ------
+wrt-popup-wrt-runtime device::app_logging -w---- ------
+wrt-popup-wrt-runtime ail::db rw---- ------
+wrt-popup-wrt-runtime xorg rwx--- ------
+wrt-popup-wrt-runtime isf r-x--- ------
+wrt-popup-wrt-runtime system::vconf rwx--- ------
+wrt-popup-wrt-runtime sound_server rw---- ------
+wrt-popup-wrt-runtime e17 rw---- ------
+e17 wrt-popup-wrt-runtime rw---- ------
+wrt-popup-wrt-runtime system::share rwx--- ------
+wrt-popup-wrt-runtime pulseaudio rwx--- ------
+wrt-popup-wrt-runtime dbus r----- ------
+

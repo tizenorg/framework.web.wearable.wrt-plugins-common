@@ -1,0 +1,12 @@
+prefix=/usr
+project_name=@CMAKE_PROJECT_NAME@
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/${project_name}
+
+Name: WebRuntime DeviceApis Widget Interface module
+Description: WebRuntime Widget Interface module
+Version: @CMAKE_PROJECT_VERSION@
+Requires: dpl-efl wrt-plugins-commons dpl-wrt-dao-ro wrt-plugins-localstorage wrt-commons-widget-interface-dao
+Libs: -L${libdir} -lwrt-plugins-widget-interface
+Cflags: -I${includedir}/WidgetInterface
