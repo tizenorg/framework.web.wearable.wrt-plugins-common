@@ -34,6 +34,7 @@ static unsigned  int s_xWindowHandle = 0;
 
 namespace {
 const char* const TIZEN_GET_WINDOW_HANDLE = "tizen://getWindowHandle";
+const char* const TIZEN_IS_BACKGROUND_SUPPORTED = "ToUIProcess::BACKGROUND_SUPPORTED";
 const char* const TIZEN_CLEAR_ALL_COOKIES = "tizen://clearAllCookies";
 
 static void sendPostMessage(const char* name, const char* body)
@@ -234,4 +235,47 @@ void IPCMessageSupport::replyAsyncMessageToWebProcess(Ewk_Context* ewkContext, i
     strBody = ss.str() + "_" + strBody;
 
     ewk_context_message_post_to_injected_bundle(ewkContext, REPLY_ASYNC, strBody.c_str());
+}
+
+namespace {
+  std::string WKStringToString(WKStringRef str)
+  {
+      if (WKStringIsEmpty(str)) {
+          return std::string();
+      } else {
+          size_t size = WKStringGetMaximumUTF8CStringSize(str);
+          std::unique_ptr<char []> buffer(new char[size + 1]);
+          WKStringGetUTF8CString(str, buffer.get(), size + 1);
+          return std::string(buffer.get());
+      }
+  }
+}  // namespace
+
+std::string IPCMessageSupport::sendSyncMessageToUiProcess(const char* name, const char* body) {
+    _D("called : %s %s", name ? name : "", body ? body : "");
+
+    WKStringRef nameWKString = WKStringCreateWithUTF8CString(name);
+    WKStringRef bodyWKString = NULL;
+    WKTypeRef retval = NULL;
+    if (body) {
+        bodyWKString = WKStringCreateWithUTF8CString(body);
+    }
+
+    WKBundlePostSynchronousMessage(
+            s_injectedBundleRef,
+            nameWKString,
+            bodyWKString,
+            &retval);
+
+    WKRelease(nameWKString);
+    if (bodyWKString) {
+        WKRelease(bodyWKString);
+    }
+    if (retval != NULL) {
+        std::string ret = WKStringToString(static_cast<WKStringRef>(retval));
+        WKRelease(retval);
+        return ret;
+    } else {
+        return std::string();
+    }
 }

@@ -78,6 +78,7 @@ const char* sendMessageToUiProcess(const char* name, const char* body);
 int  sendAsyncMessageToUiProcess(const char* name, const char* body, AsyncReplyCallback replyCallback, void* data);
 void* ignoreAsyncMessageReply(int handle);
 void replyAsyncMessageToWebProcess(Ewk_Context* ewkContext, int handle, const char* body);
+std::string sendSyncMessageToUiProcess(const char* name, const char* body);
 }
 
 #endif // WRT_SRC_IPC_MESSAGE_SUPPORT
