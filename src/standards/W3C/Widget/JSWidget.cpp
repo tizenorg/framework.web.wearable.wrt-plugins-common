@@ -32,6 +32,7 @@
 #include <Widget/IWidget.h>
 #include <LocalStorage/LocalStorageMgr.h>
 #include <Commons/WrtAccess/WrtAccess.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 // temporary
 extern "C" JSGlobalContextRef JSContextGetGlobalContext(JSContextRef ctx);
@@ -170,7 +171,7 @@ JSObjectRef createPreferencesObject(JSContextRef context,
         delete priv;
     }
     //Unprotect is called in JSWidget::finalize
-    JSValueProtect(context, preferences);
+    JSValueSafeProtect(context, preferences);
 
     return preferences;
 }
@@ -292,7 +293,7 @@ void JSWidget::finalize(JSObjectRef object)
         static_cast<JSWidgetPrivateObject*>(JSObjectGetPrivate(object));
 
     if (priv) {
-        JSValueUnprotect(priv->getContext(),
+        JSValueSafeUnprotect(priv->getContext(),
                          priv->getObject()->preferencesObject);
 
         delete priv;

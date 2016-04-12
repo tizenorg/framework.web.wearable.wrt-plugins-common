@@ -43,6 +43,8 @@ SET(SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/JSDOMExceptionFactory.cpp
   #Pending Operation support
   ${CMAKE_CURRENT_SOURCE_DIR}/JSPendingOperation.cpp
+  #support safe protect
+  ${CMAKE_CURRENT_SOURCE_DIR}/JSLifeManager.cpp
 )
 
 
@@ -85,4 +87,6 @@ INSTALL_HEADER_FILE(SupportPendingOperation.h)
 INSTALL_HEADER_FILE(Utils.h)
 INSTALL_HEADER_FILE(JSPendingOperation.h)
 INSTALL_HEADER_FILE(JSPendingOperationPrivateObject.h)
+#Safe Protect
+INSTALL_HEADER_FILE(JSLifeManager.h)
 

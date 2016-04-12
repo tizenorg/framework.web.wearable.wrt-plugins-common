@@ -21,6 +21,7 @@
 #include <dpl/assert.h>
 #include <Commons/Exception.h>
 #include <Commons/TypeTraits.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 namespace WrtDeviceApis {
 namespace CommonsJavaScript {
@@ -41,7 +42,7 @@ struct AcquireByProtect
     void acquire(T* object)
     {
         Assert(object && "Object passed to protect can't be NULL.");
-        JSValueProtect(object->getContext(), object->getObject());
+        JSValueSafeProtect(object->getContext(), object->getObject());
     }
 
   protected:
@@ -81,7 +82,7 @@ struct ReleaseByUnprotect
     void release(T* object)
     {
         Assert(object && "Object passed to unprotect can't be NULL.");
-        JSValueUnprotect(object->getContext(), object->getObject());
+        JSValueSafeUnprotect(object->getContext(), object->getObject());
     }
 
   protected:

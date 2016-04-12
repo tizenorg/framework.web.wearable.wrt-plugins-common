@@ -22,6 +22,7 @@
 #include "JSCallbackManager.h"
 #include <WKBundle.h>
 #include <dpl/log/secure_log.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 namespace WrtDeviceApis {
 namespace CommonsJavaScript {
@@ -81,22 +82,22 @@ JSCallbackManager::JSCallbackManager(JSContextRef context,
 JSCallbackManager::~JSCallbackManager()
 {
     if (m_onSuccess) {
-        JSValueUnprotect(m_context, m_onSuccess);
+        JSValueSafeUnprotect(m_context, m_onSuccess);
     }
 
     if (m_onError) {
-        JSValueUnprotect(m_context, m_onError);
+        JSValueSafeUnprotect(m_context, m_onError);
     }
 
     if (m_object) {
-        JSValueUnprotect(m_context, m_object);
+        JSValueSafeUnprotect(m_context, m_object);
     }
 }
 
 void JSCallbackManager::setOnSuccess(JSValueRef onSuccess)
 {
     if (m_onSuccess != NULL) {
-        JSValueUnprotect(m_context, m_onSuccess);
+        JSValueSafeUnprotect(m_context, m_onSuccess);
     }
 
     if (onSuccess) {
@@ -106,7 +107,7 @@ void JSCallbackManager::setOnSuccess(JSValueRef onSuccess)
     }
 
     if (m_onSuccess != NULL) {
-        JSValueProtect(m_context, m_onSuccess);
+        JSValueSafeProtect(m_context, m_onSuccess);
     }
 }
 
@@ -118,7 +119,7 @@ JSValueRef JSCallbackManager::getOnSuccess() const
 void JSCallbackManager::setOnError(JSValueRef onError)
 {
     if (m_onError != NULL) {
-        JSValueUnprotect(m_context, m_onError);
+        JSValueSafeUnprotect(m_context, m_onError);
     }
 
     if (onError) {
@@ -128,7 +129,7 @@ void JSCallbackManager::setOnError(JSValueRef onError)
     }
 
     if (m_onError != NULL) {
-        JSValueProtect(m_context, m_onError);
+        JSValueSafeProtect(m_context, m_onError);
     }
 }
 
@@ -140,13 +141,13 @@ JSValueRef JSCallbackManager::getOnError() const
 void JSCallbackManager::setObject(JSObjectRef object)
 {
     if (m_object != NULL) {
-        JSValueUnprotect(m_context, m_object);
+        JSValueSafeUnprotect(m_context, m_object);
     }
 
     m_object = object;
 
     if (m_object != NULL) {
-        JSValueProtect(m_context, m_object);
+        JSValueSafeProtect(m_context, m_object);
     }
 }
 

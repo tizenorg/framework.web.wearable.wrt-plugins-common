@@ -36,6 +36,7 @@
 #include <dpl/wrt-dao-ro/global_config.h>
 
 #include <JavaScriptCore/JavaScript.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 #include <string>
 #include <sys/types.h>
@@ -220,12 +221,14 @@ void PluginLogic::dispatchJavaScriptEvent(JSGlobalContextRef context,
 
 void PluginLogic::loadFrame(JSGlobalContextRef context)
 {
+    WrtDeviceApis::CommonsJavaScript::JSLifeManager::GetInstance().AddGlobalContext(context);
     m_impl->loadFrame(context);
 }
 
 void PluginLogic::unloadFrame(JSGlobalContextRef context)
 {
     m_impl->unloadFrame(context);
+    WrtDeviceApis::CommonsJavaScript::JSLifeManager::GetInstance().ReleaseContext(context);
 }
 
 unsigned int PluginLogic::windowHandle() const

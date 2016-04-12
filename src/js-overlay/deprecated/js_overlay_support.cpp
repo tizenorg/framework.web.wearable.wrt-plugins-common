@@ -25,6 +25,7 @@
 #include <JavaScriptCore/JavaScript.h>
 
 #include <js_overlay_support.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 namespace JSOverlaySupport {
 class JSFunctionDispatcher
@@ -75,13 +76,13 @@ JSObjectPtr createWrappedFunction(
 
     JSStringRelease(name_js);
 
-    LogDebug("JSValueProtect invoked for: "
+    LogDebug("JSValueSafeProtect invoked for: "
              << overlayFunction->getObject() << " "
              << originalFunction->getObject() << " Wrapper:"
              << fun);
 
     //the value is unprotected in finalize of the JSFunctionDispatcher object
-    JSValueProtect(ctx,
+    JSValueSafeProtect(ctx,
                    static_cast<JSObjectRef>(
                        overlayFunction->getObject()));
 
@@ -126,7 +127,7 @@ void JSFunctionDispatcher::finalize(JSObjectRef object)
 
     PrivateData* priv = static_cast<PrivateData*>(JSObjectGetPrivate(object));
     if (priv) {
-        JSValueUnprotect(priv->context,
+        JSValueSafeUnprotect(priv->context,
                          static_cast<JSObjectRef>(
                              priv->overlayFunction->getObject()));
         delete priv;

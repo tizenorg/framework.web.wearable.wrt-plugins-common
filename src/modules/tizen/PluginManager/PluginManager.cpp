@@ -33,6 +33,7 @@
 #include <dpl/exception.h>
 #include <dpl/log/secure_log.h>
 #include <dpl/foreach.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 using namespace std;
 
@@ -61,7 +62,7 @@ PluginManager::~PluginManager()
 {
     ObjectList::iterator it = m_objectList.begin();
     for (; it != m_objectList.end(); ++it) {
-        JSValueUnprotect(m_context, it->second);
+        JSValueSafeUnprotect(m_context, it->second);
     }
     WrtDB::WrtDatabase::detachFromThread();
 }
@@ -156,9 +157,9 @@ bool PluginManager::setProperty(const string &name,
 {
     _D("setProperty %s", name.c_str());
     if (m_objectList.count(name) > 0) {
-        JSValueUnprotect(m_context, m_objectList[name]);
+        JSValueSafeUnprotect(m_context, m_objectList[name]);
     }
-    JSValueProtect(m_context, value);
+    JSValueSafeProtect(m_context, value);
     m_objectList[name] = value;
     return true;
 }
@@ -167,7 +168,7 @@ bool PluginManager::deleteProperty(const string &name)
 {
     if (m_objectList.count(name) > 0) {
         _D("deleteProperty %s", name.c_str());
-        JSValueUnprotect(m_context, m_objectList[name]);
+        JSValueSafeUnprotect(m_context, m_objectList[name]);
         m_objectList.erase(name);
         return true;
     }

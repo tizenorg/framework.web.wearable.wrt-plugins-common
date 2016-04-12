@@ -29,6 +29,7 @@
 #include <js_overlay_addEventListener.h>
 #include <js_overlay_types.h>
 #include <JSStorageEvent.h>
+#include <CommonsJavaScript/JSLifeManager.h>
 
 namespace WrtPlugins {
 namespace W3C {
@@ -78,7 +79,7 @@ JSValueRef AddEventListenerSupport::AddEventListener(
         LogError("JS object is not a function");
         return JSValueMakeUndefined(context);
     }
-    JSValueProtect(global_context, arguments[1]);
+    JSValueSafeProtect(global_context, arguments[1]);
     //add object to Listeners
     //set event information according to each event type
     CallbackData data;
@@ -109,7 +110,7 @@ void AddEventListenerSupport::RemoveIFrame(JSObjectPtr iframe)
 
     FOREACH(listener, *it->second)
     {
-        JSValueUnprotect(listener->context, listener->object);
+        JSValueSafeUnprotect(listener->context, listener->object);
     }
     m_listeners.erase(it);
     LogDebug("Iframe removed from add event listener object");
@@ -139,7 +140,7 @@ void AddEventListenerSupport::CallStorageListenersFromDifferentIFrames(
             const size_t argc = 1;
             JSValueRef argv[argc] = { eventObject };
 
-            JSValueProtect(listener->context, eventObject);
+            JSValueSafeProtect(listener->context, eventObject);
 
             if (listener->eventType == StorageCustomEvent)
             {
@@ -152,7 +153,7 @@ void AddEventListenerSupport::CallStorageListenersFromDifferentIFrames(
                     NULL);
             }
 
-            JSValueUnprotect(listener->context, eventObject);
+            JSValueSafeUnprotect(listener->context, eventObject);
         }
     }
 
